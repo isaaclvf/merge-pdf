@@ -1,3 +1,5 @@
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+
 type FileListProps = {
   files: File[];
   handleMoveUp: (index: number) => void;
@@ -11,8 +13,10 @@ function FileList({
   handleMoveDown,
   handleRemoveFile,
 }: FileListProps) {
+  const [animationParent] = useAutoAnimate();
+
   return (
-    <ul>
+    <ul ref={animationParent}>
       {files.map((file, index) => (
         <li key={index}>
           File {index + 1}: {file.name}

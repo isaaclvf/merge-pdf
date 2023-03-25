@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./App.css";
 import MergeButton from "./MergeButton";
 import FileList from "./FileList";
+import "./App.css";
 
 function App() {
   const [files, setFiles] = useState<File[]>([]);
