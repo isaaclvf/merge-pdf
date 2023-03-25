@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import MergeButton from "./MergeButton";
 
 function App() {
   const [files, setFiles] = useState<File[]>([]);
@@ -24,14 +25,20 @@ function App() {
   const handleMoveUp = (index: number) => {
     if (index === 0) return;
     const newFiles = [...files];
-    [newFiles[index - 1], newFiles[index]] = [newFiles[index], newFiles[index - 1]];
+    [newFiles[index - 1], newFiles[index]] = [
+      newFiles[index],
+      newFiles[index - 1],
+    ];
     setFiles(newFiles);
   };
 
   const handleMoveDown = (index: number) => {
     if (index === files.length - 1) return;
     const newFiles = [...files];
-    [newFiles[index], newFiles[index + 1]] = [newFiles[index + 1], newFiles[index]];
+    [newFiles[index], newFiles[index + 1]] = [
+      newFiles[index + 1],
+      newFiles[index],
+    ];
     setFiles(newFiles);
   };
 
@@ -47,9 +54,19 @@ function App() {
             {files.map((file, index) => (
               <li key={index}>
                 File {index + 1}: {file.name}
-                <button onClick={() => handleMoveUp(index)} disabled={index === 0} >Up</button>
-                <button onClick={() => handleMoveDown(index)} disabled={index === files.length-1}>Down</button>
-                <button onClick={() => handleRemoveFile(index)} >Remove</button>
+                <button
+                  onClick={() => handleMoveUp(index)}
+                  disabled={index === 0}
+                >
+                  Up
+                </button>
+                <button
+                  onClick={() => handleMoveDown(index)}
+                  disabled={index === files.length - 1}
+                >
+                  Down
+                </button>
+                <button onClick={() => handleRemoveFile(index)}>Remove</button>
               </li>
             ))}
           </ul>
@@ -62,6 +79,7 @@ function App() {
           multiple
           onChange={handleFileChange}
         />
+        {files.length > 0 && <MergeButton files={files} />}
       </div>
     </div>
   );
