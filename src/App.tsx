@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import MergeButton from "./MergeButton";
+import FileList from "./FileList";
 
 function App() {
   const [files, setFiles] = useState<File[]>([]);
@@ -50,26 +51,12 @@ function App() {
         onDrop={handleDrop}
       >
         {files.length > 0 ? (
-          <ul>
-            {files.map((file, index) => (
-              <li key={index}>
-                File {index + 1}: {file.name}
-                <button
-                  onClick={() => handleMoveUp(index)}
-                  disabled={index === 0}
-                >
-                  Up
-                </button>
-                <button
-                  onClick={() => handleMoveDown(index)}
-                  disabled={index === files.length - 1}
-                >
-                  Down
-                </button>
-                <button onClick={() => handleRemoveFile(index)}>Remove</button>
-              </li>
-            ))}
-          </ul>
+          <FileList
+            files={files}
+            handleMoveUp={handleMoveUp}
+            handleMoveDown={handleMoveDown}
+            handleRemoveFile={handleRemoveFile}
+          />
         ) : (
           <p>Drag and drop PDF files here, or click to select files</p>
         )}
